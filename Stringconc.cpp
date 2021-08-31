@@ -110,3 +110,74 @@ int main()
 	student1.gets(80);
 	student1.display();
 }
+
+
+//VirtualBaseClasses
+
+#include <iostream>
+
+class student
+{
+protected:
+	int r;
+public:
+	void getn(int a)
+	{
+		r = a;
+	}
+	void putn()
+	{
+		std::cout << "Roll Number = " << r << std::endl;
+	}
+};
+
+class test :public virtual student
+{
+protected:
+	int m1, m2;
+public:
+	void getm(int a1, int a2) { m1 = a1; m2 = a2; }
+	void putm()
+	{
+		std::cout << "Marks 1 : " << m1 << std::endl;
+		std::cout << "Marks 2 : " << m2 << std::endl;
+	}
+};
+
+class sports :virtual public student
+{
+protected:
+	int s;
+public:
+	void gets(int z) { s = z; }
+	void puts()
+	{
+		std::cout << "Sports marks is " << s << std::endl;
+	}
+};
+
+class result :public sports, public test
+{
+	int total;
+public:
+	void display();
+};
+
+void result::display()
+{
+	total = m1 + m2 + s;
+	putn();
+	putm();
+	puts();
+
+	std::cout << "Total marks is " << total << std::endl;
+}
+
+int main()
+{
+	result r1;
+	r1.getn(1);
+	r1.getm(100, 90);
+	r1.gets(60);
+	r1.display();
+}
